@@ -10,6 +10,7 @@ enum PageName { home, search, upload, activity, myPage }
 class BottomNavController extends GetxController {
   RxInt pageIndex = 0.obs;
   RxList<int> bottomHistory = [0].obs;
+  final searchPageNavigationKey = GlobalKey<NavigatorState>();
 
   void changeBottomNav(int value, {bool hasGesture = true}) {
     final page = PageName.values[value];
@@ -17,8 +18,8 @@ class BottomNavController extends GetxController {
       case PageName.upload:
         Get.to(() => const Upload());
         break;
-      case PageName.home:
       case PageName.search:
+      case PageName.home:
       case PageName.activity:
       case PageName.myPage:
         _changePage(value);
@@ -26,7 +27,10 @@ class BottomNavController extends GetxController {
     }
   }
 
-  void _changePage(int value, {bool hasGesture = true}) {
+  Future<void> _changePage(int value, {bool hasGesture = true}) async {
+    if(await Get.keys[1]!.currentState!.maybePop()){
+      return;
+    }
     pageIndex(value);
     if (!hasGesture) return;
     if (bottomHistory.last != value) {
@@ -55,11 +59,4 @@ class BottomNavController extends GetxController {
     }
   }
 
-  @override
-  void onInit() {
-    ever(bottomHistory, (value) {
-      print(value);
-    });
-    super.onInit();
-  }
 }

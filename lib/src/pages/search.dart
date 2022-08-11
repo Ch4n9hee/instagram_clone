@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:instagram_clone/src/pages/search/search_focus.dart';
 import 'package:quiver/iterables.dart';
 
 class Search extends StatefulWidget {
@@ -14,7 +15,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
   List<List<int>> groupBox = [[], [], []];
-  List<int> groupIndex = [0,0,0];
+  List<int> groupIndex = [0, 0, 0];
 
   @override
   void initState() {
@@ -22,7 +23,7 @@ class _SearchState extends State<Search> {
     for (int i = 0; i < 100; i++) {
       final gridIndex = groupIndex.indexOf(min<int>(groupIndex)!);
       int size = 1;
-      if(gridIndex != 1){
+      if (gridIndex != 1) {
         size = Random().nextInt(100) % 2 == 0 ? 1 : 2;
       }
       groupBox[gridIndex].add(size);
@@ -34,24 +35,29 @@ class _SearchState extends State<Search> {
     return Row(
       children: [
         Expanded(
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-            margin: const EdgeInsets.only(left: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(6),
-              color: const Color(0xffefefef),
-            ),
-            child: Row(
-              children: const [
-                Icon(Icons.search),
-                Text(
-                  '검색',
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: Color(0xff838383),
+          child: GestureDetector(
+            onTap: () {
+              Get.to(()=>const SearchFocus(), id: 1);
+            },
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+              margin: const EdgeInsets.only(left: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(6),
+                color: const Color(0xffefefef),
+              ),
+              child: Row(
+                children: const [
+                  Icon(Icons.search),
+                  Text(
+                    '검색',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Color(0xff838383),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -92,36 +98,6 @@ class _SearchState extends State<Search> {
           ),
         ),
       ),
-      // children: [
-      //   Expanded(
-      //     child: Column(
-      //       children: [
-      //         Container(
-      //           height: 140,
-      //           color: Colors.red,
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      //   Expanded(
-      //       child: Column(
-      //     children: [
-      //       Container(
-      //         height: 140,
-      //         color: Colors.blue,
-      //       ),
-      //     ],
-      //   )),
-      //   Expanded(
-      //       child: Column(
-      //     children: [
-      //       Container(
-      //         height: 140,
-      //         color: Colors.grey,
-      //       ),
-      //     ],
-      //   )),
-      // ],
     );
   }
 
