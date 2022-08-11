@@ -60,7 +60,7 @@ class _UploadState extends State<Upload> {
       width: Get.width,
       height: Get.width,
       color: Colors.grey,
-      child: selectedImage == null ? SizedBox.shrink() : _photoWidget(selectedImage!, Get.height.toInt()),
+      child: selectedImage == null ? SizedBox.shrink() : _photoWidget(selectedImage!, 1080),
     );
   }
 
@@ -186,7 +186,7 @@ class _UploadState extends State<Upload> {
         backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
-          onTap: () {},
+          onTap: Get.back,
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: ImageData(IconsPath.closeImage),
