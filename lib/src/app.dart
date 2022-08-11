@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:instagram_clone/src/components/image_data.dart';
 import 'package:instagram_clone/src/controllers/bottom_nav_controller.dart';
+import 'package:instagram_clone/src/pages/MyPage.dart';
+import 'package:instagram_clone/src/pages/active_history.dart';
 import 'package:instagram_clone/src/pages/home.dart';
 import 'package:instagram_clone/src/pages/search.dart';
 
@@ -16,7 +18,7 @@ class App extends GetView<BottomNavController> {
             body: IndexedStack(
               index: controller.pageIndex.value,
               children: [
-                Home(),
+                const Home(),
                 Navigator(
                   key: Get.nestedKey(1),
                   onGenerateRoute: (routeSetting){
@@ -24,8 +26,8 @@ class App extends GetView<BottomNavController> {
                   },
                 ),
                 Container(child: Center(child: Text('Upload')),),
-                Container(child: Center(child: Text('Activity')),),
-                Container(child: Center(child: Text('MyPage')),),
+                const ActiveHistory(),
+                const MyPage()
               ],
             ),
             bottomNavigationBar:BottomNavigationBar(
